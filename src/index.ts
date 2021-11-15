@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import app from './server';
+import app from './server.js';
 import axios from "axios";
 import fs from "fs";
 import path from "path";
