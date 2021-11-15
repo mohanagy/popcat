@@ -20,13 +20,14 @@ const doit = async (url: string, words: string[], subdomain: boolean, name: stri
     for await (const word of words) {
         console.log(`process with name :${name} and word : ${word} url :${url} and subdomain is ${subdomain ? 'ON' : 'OFF'} `)
         try {
-            const response = await axios.get(`${subdomain && 'https://' + word + '.'}${url}${!subdomain && word} `);
+            const response = await axios.get(`${subdomain && 'https://' + word + '.'}${url}${!subdomain && word}`);
             await wait(3000)
             console.log({
                 subdomain,
                 url,
                 name,
-                [word]: response.status
+                [word]: response.status,
+                result: `${subdomain && 'https://' + word + '.'}${url}${!subdomain && word}`
 
             })
 
@@ -53,7 +54,7 @@ app.listen(PORT, async () => {
 
     setInterval(async () => {
 
-        await axios.get('/')
+        await axios.get('https://umnea.herokuapp.com/')
     }, 30000)
 
 
