@@ -44,7 +44,8 @@ await doit('umnea.net/', file2Words, true, 'subdomainLst2')
 
 
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
+
 
 app.listen(PORT, async () => {
     await doit('https://www.umnea.net/', file1Words, false, 'list1')
