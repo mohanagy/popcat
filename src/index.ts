@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import app from './server';
 import axios from "axios";
 import fs from "fs";
 import path from "path";
@@ -17,7 +18,7 @@ const wait = (time: number) => new Promise((resolve) => {
 const doit = async (url: string, words: string[], subdomain: boolean, name: string) => {
 
     for await (const word of words) {
-        console.log(`process with name :${name} and url :${url} and subdomain is ${subdomain ? 'ON' : 'OFF'} `)
+        console.log(`process with name :${name} and word : ${word} url :${url} and subdomain is ${subdomain ? 'ON' : 'OFF'} `)
         try {
             const response = await axios.get(`${subdomain && 'https://' + word + '.'}${url}${!subdomain && word} `);
             await wait(3000)
@@ -25,7 +26,7 @@ const doit = async (url: string, words: string[], subdomain: boolean, name: stri
                 subdomain,
                 url,
                 name,
-                word: response.status
+                [word]: response.status
 
             })
 
@@ -41,7 +42,21 @@ await doit('umnea.net/', file1Words, true, 'subdomainList1')
 await doit('umnea.net/', file2Words, true, 'subdomainLst2')
 
 
-setInterval(async () => {
 
-    await axios.get('/')
-}, 30000)
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, async () => {
+    await doit('https://www.umnea.net/', file1Words, false, 'list1')
+    await doit('https://www.umnea.net/', file2Words, false, 'list2')
+    await doit('umnea.net/', file1Words, true, 'subdomainList1')
+    await doit('umnea.net/', file2Words, true, 'subdomainLst2')
+
+    setInterval(async () => {
+
+        await axios.get('/')
+    }, 30000)
+
+
+    // eslint-disable-next-line
+    console.log(`Our app is running on http://localhost:8080`);
+});
