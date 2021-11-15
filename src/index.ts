@@ -37,12 +37,6 @@ const doit = async (url: string, words: string[], subdomain: boolean, name: stri
     }
 }
 
-await doit('https://www.umnea.net/', file1Words, false, 'list1')
-await doit('https://www.umnea.net/', file2Words, false, 'list2')
-await doit('umnea.net/', file1Words, true, 'subdomainList1')
-await doit('umnea.net/', file2Words, true, 'subdomainLst2')
-
-
 
 const PORT = process.env.PORT || 3000;
 console.log(console.log({
