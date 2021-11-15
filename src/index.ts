@@ -10,7 +10,7 @@ import nodemailer from 'nodemailer';
 const file1 = await fs.readFileSync(path.resolve('./', 'directory_only_one.small.txt'), 'utf8')
 const file1Words = file1.split('/\n')
 const file2 = await fs.readFileSync(path.resolve('./', 'Subdomain.txt'), 'utf8')
-const file2Words = file2.split('/\n')
+const file2Words = file2.split('\r\n')
 const wait = (time: number) => new Promise((resolve) => {
 
     setTimeout(resolve, time);
