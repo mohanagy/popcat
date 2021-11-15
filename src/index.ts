@@ -77,7 +77,7 @@ app.listen(PORT, async () => {
     setInterval(async () => {
 
         console.log("ping")
-        await axios.get('http://localhost:3000/');
+        await axios.get('https://umnea.herokuapp.com/');
     }, 60000)
 
     await doit('https://www.umnea.net/', file1Words, false, 'list1')
