@@ -38,27 +38,30 @@
 // // });
 
 import puppeteer from 'puppeteer'
-import { cpus } from 'os';
-import cluster from 'cluster';
+// import { cpus } from 'os';
+// import cluster from 'cluster';
 
 let x = 0;
+let page: any;
 (async () => {
-    if (cluster.isMaster) {
+    // if (cluster.isMaster) {
 
-        for (let index = 0; index < cpus().length; index += 1) {
-            cluster.fork();
-        }
-    } else {
-        while (true) {
-            console.log('start');
-            const browser = await puppeteer.launch();
-            const page = await browser.newPage();
-            await page.goto('https://popcat.click');
-            const body = await page.$('body')
-            await body?.click()
-            await browser.close();
-            console.log("finish")
-        }
+    const browser = await puppeteer.launch();
+    page = await browser.newPage();
+    await page.goto('https://popcat.click');
+    console.log("ASd");
+    // for (let index = 0; index < cpus().length; index += 1) {
+    //     cluster.fork();
+    // }
+    // } else {
+    while (x < 1000000) {
+        console.log('start');
+        await page?.keyboard.press('Enter');
+        console.log("finish")
     }
+    // }
+    await browser.close();
+
 })();
+
 
